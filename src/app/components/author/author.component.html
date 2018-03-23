@@ -1,0 +1,24 @@
+<h3>Authors</h3>
+<kendo-grid [data]="authors"
+            [height]="533"
+            [pageable]="true" [sortable]="true" [pageSize]="10"
+            [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+            (dataStateChange)="onStateChange($event)"
+            (edit)="editHandler($event)" (cancel)="cancelHandler($event)"
+            (save)="saveHandler($event)" (remove)="removeHandler($event)"
+            (add)="addHandler($event)"
+            [navigable]="true">
+  <ng-template kendoGridToolbarTemplate>
+    <button kendoGridAddCommand>Add new</button>
+  </ng-template>
+  <kendo-grid-column field="name" title="Author Name" width="200"> </kendo-grid-column>
+  <kendo-grid-column field="surname" title="Author Surname" width="200"> </kendo-grid-column>
+  <kendo-grid-command-column title="Command" width="220">
+    <ng-template kendoGridCellTemplate let-isNew="isNew">
+      <button kendoGridEditCommand class="k-primary">Edit</button>
+      <button kendoGridRemoveCommand>Remove</button>
+      <button kendoGridSaveCommand [disabled]="formGroup?.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
+      <button kendoGridCancelCommand>{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+    </ng-template>
+  </kendo-grid-command-column>
+</kendo-grid>
